@@ -1,0 +1,10 @@
+{
+    "deno.codeLens.implementations": true,
+    "deno.codeLens.references": true,
+    "deno.codeLens.referencesAllFunctions": true,
+    "deno.enable": true,
+    "deno.lint": true,
+    "[typescript]": {
+        "editor.formatOnSave": true
+    },
+}
