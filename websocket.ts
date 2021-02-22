@@ -1,8 +1,14 @@
-type Data = string | ArrayBuffer | SharedArrayBuffer | Blob | ArrayBufferView;
-type Waiter<T> = {
+export type Data =
+  | string
+  | ArrayBuffer
+  | SharedArrayBuffer
+  | Blob
+  | ArrayBufferView;
+export type Waiter<T> = {
   res: (v: T) => void;
   rej: (v: unknown) => void;
 };
+
 class WaitQueue<T> {
   private queue: T[] = [];
   private waiter: Waiter<T>[] = [];
