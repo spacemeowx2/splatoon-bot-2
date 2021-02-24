@@ -8,13 +8,18 @@ export type ImageContent = {
   image: Image;
 };
 
-export type Content = (ImageContent)[];
+export type Content = (TextContent | ImageContent)[];
+
+export interface Replyable {
+  reply(): Promise<void>;
+}
 
 export interface Message {
   content: Content;
 }
 
 export interface Provider {
-  id: string;
-  receiveMessage(): Message;
+  readonly id: string;
+  receiveMessage(): Promise<Message>;
+  sendMessage(message: Message): Promise<void>;
 }
