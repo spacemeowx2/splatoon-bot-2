@@ -1,9 +1,4 @@
-export type Data =
-  | string
-  | ArrayBuffer
-  | SharedArrayBuffer
-  | Blob
-  | ArrayBufferView;
+export type Data = string | ArrayBuffer;
 export type Waiter<T> = {
   res: (v: T) => void;
   rej: (v: unknown) => void;

@@ -7,4 +7,5 @@
     "[typescript]": {
         "editor.formatOnSave": true
     },
+    "deno.importMap": "./import_map.json",
 }

@@ -1,10 +1,10 @@
-export type Image = Uint8Array;
+export type Image = () => Promise<Uint8Array>;
 export type TextContent = {
   type: "text";
   text: string;
 };
 export type ImageContent = {
-  type: "picture";
+  type: "image";
   image: Image;
 };
 
@@ -18,8 +18,11 @@ export interface Message {
   content: Content;
 }
 
-export interface Provider {
-  readonly id: string;
+export interface PlatformChannel {
   receiveMessage(): Promise<Message>;
   sendMessage(message: Message): Promise<void>;
+}
+
+export interface BotProvider {
+  provideBot(config: unknown): Promise<PlatformChannel>;
 }

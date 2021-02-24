@@ -1,5 +1,7 @@
 import { validate } from "https://deno.land/x/schema_validator@v0.0.3/src/validator.ts";
 import * as J from "https://deno.land/x/jsonschema@v1.3.0/jsonschema.ts";
+import { Bot } from "./bot.ts";
+import * as log from "https://deno.land/std@0.88.0/log/mod.ts";
 
 export type TypeOf<T> = J.TypeOf<T>;
 
@@ -26,7 +28,7 @@ export const ConfigType = J.type({
 
 export type Config = TypeOf<typeof ConfigType>;
 
-export function fromConfig(cfg: string) {
+export async function fromConfig(cfg: string): Promise<Bot> {
   const config = JSON.parse(cfg).bot as Config;
 
   const err = validate(config, J.print(ConfigType));
@@ -34,5 +36,12 @@ export function fromConfig(cfg: string) {
     throw err;
   }
 
-  return config;
+  const bot = new Bot();
+  for (const { type, group, ...cfg } of config.accounts) {
+    log.info(`正在登录 ${type}`);
+    await bot.login(type, cfg);
+    log.info(`登录成功`);
+  }
+
+  return bot;
 }
