@@ -1,4 +1,4 @@
-export type Image = () => Promise<Uint8Array>;
+export type Image = () => Promise<{ buffer: ArrayBuffer; filename: string }>;
 export type TextContent = {
   type: "text";
   text: string;
@@ -14,8 +14,12 @@ export interface Replyable {
   reply(): Promise<void>;
 }
 
+export type ChannelId = string;
+
 export interface Message {
+  channelId: ChannelId;
   content: Content;
+  inner?: unknown;
 }
 
 export interface PlatformChannel {

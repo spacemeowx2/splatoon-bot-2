@@ -1,3 +1,4 @@
+// deno-lint-ignore-file camelcase
 import { Message, PlatformChannel } from "../../types.ts";
 import { KhlConfigType, TypeOf } from "../../config.ts";
 import { Transport } from "./transport.ts";
@@ -5,6 +6,9 @@ import * as J from "https://deno.land/x/jsonschema/jsonschema.ts";
 import * as log from "https://deno.land/std@0.88.0/log/mod.ts";
 
 type KhlConfig = TypeOf<typeof KhlConfigType>;
+type ChannelIdType = {
+  target_id: string;
+};
 
 export const ConfigType = J.type({
   type: J.literal("kaiheila"),
@@ -24,15 +28,37 @@ export class KaiheilaBot implements PlatformChannel {
   }
 
   async receiveMessage(): Promise<Message> {
-    const data = await this.transport.recv();
-    // @ts-ignore a
-    console.log(data);
+    while (true) {
+      const data = await this.transport.recv();
+      const channelIdData: ChannelIdType = { target_id: data.target_id };
+      const channelId = JSON.stringify(channelIdData);
 
-    // @ts-ignore a
-    return data;
-    // throw new Error("Method not implemented.");
+      switch (data.type) {
+        case 1:
+          return {
+            channelId,
+            content: [{ type: "text", text: data.content }],
+            inner: data,
+          };
+        default:
+          console.warn(`Unkonwn message type ${data.type}. Message ignored`);
+      }
+    }
   }
-  sendMessage(message: Message): Promise<void> {
-    throw new Error("Method not implemented.");
+  async sendMessage(message: Message): Promise<void> {
+    const { target_id }: ChannelIdType = JSON.parse(message.channelId);
+
+    for (const part of message.content) {
+      switch (part.type) {
+        case "text":
+          await this.transport.sendTextMessage(target_id, part.text);
+          break;
+        case "image": {
+          const { buffer, filename } = await part.image();
+          await this.transport.sendImageMessage(target_id, buffer, filename);
+          break;
+        }
+      }
+    }
   }
 }
