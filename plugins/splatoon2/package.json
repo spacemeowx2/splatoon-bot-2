@@ -1,0 +1,22 @@
+{
+  "name": "koishi-plugin-splatoon2",
+  "description": "查询Splatoon2的实时地图",
+  "private": true,
+  "version": "1.0.0",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "files": [
+    "lib",
+    "dist"
+  ],
+  "license": "MIT",
+  "scripts": {},
+  "keywords": [
+    "chatbot",
+    "koishi",
+    "plugin"
+  ],
+  "peerDependencies": {
+    "koishi": "^4.8.3"
+  }
+}

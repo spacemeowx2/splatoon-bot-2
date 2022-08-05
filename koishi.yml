@@ -1,0 +1,14 @@
+port: 5140
+maxPort: 5149
+
+plugins:
+  help:
+  suggest:
+  console:
+    open: true
+  logger:
+  market:
+    search:
+      endpoint: ${{ env.GITHUB_CONTENT_MIRROR }}/koishijs/registry/dist/index.json
+  status:
+  sandbox:
