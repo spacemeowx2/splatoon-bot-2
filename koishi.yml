@@ -14,6 +14,7 @@ plugins:
   adapter-kook:
     protocol: ws
     token: ${{ env.KOOK_TOKEN }}
+  splatoon2: null
 prefix:
   - .
   - ","
