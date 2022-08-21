@@ -41,15 +41,21 @@
     "@koishijs/plugin-adapter-discord": "^3.0.3",
     "@koishijs/plugin-adapter-kook": "^3.1.1",
     "@koishijs/plugin-adapter-onebot": "^5.0.7",
+    "@koishijs/plugin-adapter-qqguild": "^3.0.3",
     "@koishijs/plugin-adapter-telegram": "^3.1.3",
+    "@koishijs/plugin-bind": "^1.3.1",
     "@koishijs/plugin-console": "^4.3.1",
+    "@koishijs/plugin-database-mongo": "^3.4.2",
     "@koishijs/plugin-dataview": "^2.1.0",
+    "@koishijs/plugin-feedback": "^1.2.1",
     "@koishijs/plugin-help": "^1.1.0",
     "@koishijs/plugin-logger": "^2.1.0",
     "@koishijs/plugin-market": "^1.1.2",
+    "@koishijs/plugin-rate-limit": "^1.1.7",
     "@koishijs/plugin-sandbox": "^2.1.0",
     "@koishijs/plugin-status": "^6.1.1",
     "@koishijs/plugin-suggest": "^1.1.1",
-    "koishi": "^4.8.3"
+    "@koishijs/plugin-verifier": "^1.0.6",
+    "koishi": "^4.8.5"
   }
 }
