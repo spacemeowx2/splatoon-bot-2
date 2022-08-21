@@ -4,7 +4,7 @@ plugins:
   help: null
   suggest: null
   console:
-    open: true
+    open: false
   logger: null
   market:
     search:
@@ -17,4 +17,4 @@ plugins:
   splatoon2: null
 prefix:
   - .
-  - ","
+  - ','
