@@ -816,5 +816,3 @@ export class Splatoon2 {
     return [canvas, ctx];
   }
 }
-
-await Deno.writeFile("test.png", await new Splatoon2().getCurrentStage(0));

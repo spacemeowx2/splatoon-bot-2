@@ -59,7 +59,6 @@ const request = async <T>(
   const { code, message, data }: Response<T> = await resp.json();
 
   if (code !== 0) {
-    console.log("request", Endpoint + url, headers, reqBody, resp);
     throw new ServerError(code, message);
   }
 
@@ -162,11 +161,11 @@ export class Transport implements Deno.Closer {
     quote?: string,
   ) {
     const url = await this.createAsset(filename, buf);
-    console.log("url", url);
     await request<void>("/message/create", {
       token: this.token,
       body: {
-        type: 2,
+        // TODO: change to 2 when khl fix the bug on server
+        type: 1,
         target_id: targetId,
         content: url,
         quote,
